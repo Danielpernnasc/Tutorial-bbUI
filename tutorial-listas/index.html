@@ -1,22 +1,16 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 	<head>
 
-		<title>tutorial bbUI</title>
-
+		<title>Tutorial listas com bbUI</title>
+	
 		<link rel="stylesheet" type="css/text" href="css/bbui-min.css"></link>
-		<script type="text/javascript" src="js/bbui-min.js"></script>
 		<script type="text/javascript" src="local:///chrome/webworks.js"></script>
-
+		<script type="text/javascript" src="js/bbui-min.js"></script>
 		<script>
 			document.addEventListener("webworksready", function(e){
-					function tres(){
-						alert("tres",this)
-					}
 					bb.init();
-					bb.pushScreen("tutorial.html", "tutorial");
-
-					
+					bb.pushScreen("tutorial-menu.html", "tutorial-menu");	
 				},false);
 		</script>
 	</head>
