@@ -1,15 +1,19 @@
-<div data-bb-type="screen">
+<div data-bb-type="screen" data-bb-effect="slide-left">
 	<div data-bb-type="title" data-bb-caption="Menu Tipos de Lista" ></div>
 	
 	<div data-bb-type="image-list" data-bb-images="none">
-		<div data-bb-type="item" data-bb-title="Lista Com Imagens">
+		<div data-bb-type="item" data-bb-title="Lista Com Imagens" onclick="bb.pushScreen('lista-imagem.html', 'lista-imagem');">
 			Descrição 1
 		</div> 
-		<div data-bb-type="item" data-bb-title="Lista Com Textos">
-				Descrição 2
+		<div data-bb-type="item" data-bb-title="Lista Com Textos" onclick="bb.pushScreen('lista-texto.html', 'lista-texto');">
+			Descrição 2
 		</div>
-		<div data-bb-type="item" data-bb-title="Lista com setas">Descrição 3</div> 
-		<div data-bb-type="item" data-bb-title="Lista em grid">Descrição 4</div> 
+		<div data-bb-type="item" data-bb-title="Lista com setas" onclick="bb.pushScreen('lista-setas.html', 'lista-setas');">
+			Descrição 3
+		</div> 
+		<div data-bb-type="item" data-bb-title="Lista em grid" onclick="bb.pushScreen('lista-grid.html', 'lista-grid');">
+			Descrição 4 - Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+		</div> 
 	</div>
 
 </div>

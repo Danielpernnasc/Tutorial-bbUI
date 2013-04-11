@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+
+		<title>tutorial bbUI</title>
+
+		<link rel="stylesheet" type="css/text" href="css/bbui-min.css"></link>
+		<script type="text/javascript" src="js/bbui-min.js"></script>
+		<script type="text/javascript" src="local:///chrome/webworks.js"></script>
+
+		<script>
+			document.addEventListener("webworksready", function(e){
+					bb.init({onscreenready : function(element, id, params) {
+		                            if (id == 'tutorial') {
+										if(document.getElementById('tutorial')){
+											console.log("onscreenready: existe um elemento no DOM com id tutorial")
+										}else{
+		console.log("onscreenready: não existe um elemento no DOM com id tutorial");
+		element.getElementById('tutorial').innerHTML += '<div data-bb-type="button" id="ready-screen"> botão com onscreenready</div>';
+										}
+		                            }
+		                        }
+         					, ondomready : function(element, id, params) {
+		                            if (id == 'tutorial') {
+		                            	if(document.getElementById('tutorial')){
+											console.log("ondomready: Existe um elemento no DOM com id tutorial")
+											document.getElementById('tutorial').innerHTML += '<div data-bb-type="button" id="ready-dom"> botão com ondomready</div>';
+										}else{
+											console.log("ondomready: Não existe um elemento no DOM com id tutorial")
+										}
+		                            } 
+		                        }
+         					});
+					bb.pushScreen("tutorial.html", "tutorial");	
+				},false);
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
