@@ -24,4 +24,10 @@
   <feature id="blackberry.app"/>
   <feature id="blackberry.app.event"/>
   <feature id="blackberry.ui.contextmenu"/>
+
+  <access uri="http://blackberrydeveloper.com.br" subdomains="true">
+    <feature id="blackberry.app" required="true" version="1.0.0"/>
+    <feature id="blackberry.invoke" required="true" version="1.0.0"/>
+  </access>
+
 </widget>
