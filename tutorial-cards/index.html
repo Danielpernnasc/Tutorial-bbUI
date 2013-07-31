@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+   
+	<title>Tutorial Cards</title>
+	<script src="local:///chrome/webworks.js" type="text/javascript"></script>
+	<script>
+		// configurando o objeto para ser repassado ao email. A chamada do card de email é possível configurar o assunto, o corpo de email, para quem vai o email e quem será copiado no email.
+		var detailsEmail = {
+			    subject: "Assunto do email",
+			    body: "Corpo do email",
+			    to: ["fellyph@gmail.com"],
+			    cc: ["fellyph@hotmail.com"]
+			}
+
+		// adicionamos um listener para quando o webworks estiver pronto ele inicialize a nossa aplicação.
+		document.addEventListener("webworksready", initApp);
+		
+		
+		function initApp() {
+			 // quando o app for inicializado ele cria um botão que invoca o card de email.
+			 var buttonDinamic = document.createElement('button');
+			 buttonDinamic.onclick = enviaEmail;
+			 buttonDinamic.innerHTML = ["Clique aqui para enviar um email"];
+			 document.body.appendChild(buttonDinamic);
+		}
+
+		function enviaEmail(){
+			//invocando o email composer, como o nome sugere criar um email através de cards 
+			blackberry.invoke.card.invokeEmailComposer(detailsEmail, 
+
+			//função dispara quando ocorreu tudo bem com a utilização do card
+			function (done) {
+			    alert("done : " + done);
+			},
+
+			//função disparada caso a ação seja cancelada
+			 function (cancel) {
+			    alert("cancel : " + cancel);
+			},
+
+			//função disparada caso ocorra um erro com o card
+			function (invokeError) {
+			    alert("error : " + invokeError);
+			});
+		}
+	</script>
+</head>
+
+<body>
+		
+</body>
+</html>

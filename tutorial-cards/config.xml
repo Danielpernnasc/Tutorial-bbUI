@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets"
+        xmlns:rim="http://www.blackberry.com/ns/widgets"
+        version="1.0.0"
+        id="callCards">
+    <name>Call Cards</name>
+    <content src="local:///index.html" />
+    <author>Fellyph Cintra</author>
+    <description>Tutorial para a chamada de cards.</description>
+    
+    <feature id="blackberry.invoke.card" />
+   
+    <rim:permissions>
+        <rim:permit>access_shared</rim:permit>
+    </rim:permissions>
+</widget>
