@@ -68,11 +68,12 @@
 		}
 		
 		function saveList(){
-			//converte 
+			//converte os dados em string e salva no local storage 
 			localStorage.setItem("tasks",JSON.stringify(todoList));
 		}
 		
 		function clearList(){
+			//varre a lista a procura de tarefas realizadas
 			for(var i = 0; i < todoList.length; i++){
 				if(todoList[i].done === 'true'){
 					todoList.splice(i, 1);  //remove 1 elemento na posição i;
@@ -83,17 +84,20 @@
 		}
 		
 		function showList(){
+			//mostra a lista de todo
 			var total = todoList.length;
 			var htmlTemp = "<ul>"; 
 			for(var i = 0; i < total; i++){
-				htmlTemp += "<li data-id='"+todoList[i].id+"' data-done='" + todoList[i].done + "'>"+ todoList[i].descricao + " <time>"+ showDate(todoList[i].date)+"</time></li>"
+				htmlTemp += "<li data-id='"+todoList[i].id+"' data-done='" + todoList[i].done + "'>"+ todoList[i].descricao + " - "+ formatDate(todoList[i].date)+"</li>"
 			}
 			htmlTemp += "</ul><button>Limpar tarefas realizadas</button>";
 			todoOutput.innerHTML = htmlTemp;
 		}
 		
-		function showDate(date){
-			return date;
+		function formatDate(date){
+			var time = new Date(date);
+			var saida = time.getDate() +"/"+ time.getMonth() + "/" + time.getFullYear();
+			return saida;
 		}
 	</script>
 </head>
