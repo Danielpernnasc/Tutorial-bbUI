@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>save and load object</title>
+	<script>
+		
+		
+		window.addEventListener("load",function(){
+			if(localStorage.getItem("user")){
+				var texto = localStorage.getItem("user");
+				var objeto = JSON.parse(texto);
+				document.body.innerHTML = "nome: <strong>" + objeto.name + "</strong>" + 
+				" email: <strong>" + objeto.email + "<strong>"
+			}else{
+				var user = { 
+					name:"Fellyph",
+					email:"fellyph@blackberry.com"
+				}
+			
+				var userString = JSON.stringify(user);
+	
+				localStorage.setItem("user",userString);
+				document.body.innerHTML = "dados salvos"	
+			}
+		})
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

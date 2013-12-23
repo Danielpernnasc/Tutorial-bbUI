@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Todo List</title>
+	<style>
+		#tasks-output li{
+			cursor:pointer;
+		}
+		
+		#form-task{
+			border-top:1px solid #ddd;
+			padding:10px 0;
+			margin:10px 0;
+		}
+		
+		li[data-done="true"]{
+			text-decoration:line-through;
+		}
+	</style>
+	<script>
+		var todoList;
+		var todoOutput;
+		
+		window.addEventListener("load",function(){
+			todoOutput = document.getElementById("tasks-output")
+			if(localStorage.getItem("tasks")){
+				todoList = JSON.parse(localStorage.getItem("tasks"));
+				showList()
+			}else{
+				todoList = [];
+			}
+			
+			if(todoList.length == 0){
+				todoOutput.innerHTML = "Nenhuma tarefa cadastrada"
+			}
+			
+			document.getElementById("form-task").addEventListener("submit",onSubmit);
+			todoOutput.addEventListener("click",clickList)
+		})
+		
+		function clickList(e){
+			//somente fazer algo quando clicar em um item li
+			if(e.target.localName == "li"){
+				e.target.dataset.done = (e.target.dataset.done === 'true')? false : true;
+				todoList[e.target.dataset.id].done = e.target.dataset.done;
+				saveList();
+			}else if(e.target.localName == "button"){
+				clearList()
+			}
+		}
+		
+		function onSubmit(e){
+			console.log("chamou",e.target[0].value);
+			var task = {};
+			
+			//pego o valor cadastrado no primeiro input do meu form
+			task.descricao = e.target[0].value;
+			task.date = new Date();
+			task.id = todoList.length;
+			task.done = "false";
+			//adicionando a task na lista
+			todoList.push(task);
+			saveList();
+			showList();
+			e.preventDefault();
+			
+		}
+		
+		function saveList(){
+			//converte 
+			localStorage.setItem("tasks",JSON.stringify(todoList));
+		}
+		
+		function clearList(){
+			for(var i = 0; i < todoList.length; i++){
+				if(todoList[i].done === 'true'){
+					todoList.splice(i, 1);  //remove 1 elemento na posição i;
+				}
+			}
+			showList();
+			saveList();
+		}
+		
+		function showList(){
+			var total = todoList.length;
+			var htmlTemp = "<ul>"; 
+			for(var i = 0; i < total; i++){
+				htmlTemp += "<li data-id='"+todoList[i].id+"' data-done='" + todoList[i].done + "'>"+ todoList[i].descricao + " <time>"+ showDate(todoList[i].date)+"</time></li>"
+			}
+			htmlTemp += "</ul><button>Limpar tarefas realizadas</button>";
+			todoOutput.innerHTML = htmlTemp;
+		}
+		
+		function showDate(date){
+			return date;
+		}
+	</script>
+</head>
+<body>
+	
+	
+	<h1>todo-list</h1>
+	<div id="tasks-output"></div>
+	<form id="form-task">
+		<input type="text" name="descricao" placeholder="adicione uma nova task" required>
+		<input type="submit" value="Salvar">
+	</form>
+</body>
+</html>
