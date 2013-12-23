@@ -6,7 +6,7 @@
 	<script>
 		window.addEventListener("load",function(){
 			
-			if(localStorage.getItem("user")){
+			if(localStorage.getItem("name")){
 				sayMyName()
 			}else{
 				whatsYourName()
@@ -22,25 +22,24 @@
 		
 		
 		function sayMyName(){
-			var mensagem = "<h1> Olá " + localStorage.getItem("user") + "</h1><button id='bt-remove'>Remover</button>";
+			var mensagem = "<h1> Olá " + localStorage.getItem("name") + "</h1><button id='bt-remove'>Remover</button>";
 			
 			document.body.innerHTML = mensagem;
 			document.getElementById("bt-remove").addEventListener("click",removeName)
 		}
 		
 		function removeName(){
-			if(localStorage.getItem("user")){
-				localStorage.removeItem("user");
+			if(localStorage.getItem("name")){
+				localStorage.removeItem("name");
 				whatsYourName()
 			}	
 		}
 		
 		function saveName(){
 			var nome = document.getElementById("nome").value;
-			localStorage.setItem("user", nome) 
+			localStorage.setItem("name", nome) 
 			sayMyName();
 		}
-		
 	</script>
 </head>
 <body>
