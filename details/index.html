@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title> Details </title>
+	<style>
+		details{
+			border-radius:3px;
+			padding:5px;
+			
+		}
+		summary{
+			border-radius:3px;
+			border:1px solid #ddd;
+			padding:5px;
+			outline:none; 
+		}
+		
+		details[open]{
+			background:#ddd;
+			border:1px solid #333;
+		}
+		details[open] summary{
+			border:none;
+		}
+	</style>
+</head>
+<body>
+	
+	<!-- <details> é uma tag que podemos encapsular de desencapsular um determinado conteúdo, para obter informações adicionais sobre uma determinada informação. O elemento <details> tem um atributo chamado open, ele define se o conteúdo será inicialmente visível. Por default essa propriedade é false
+	
+O elemento <summary> deve ser incluso como filho do details. Com este elemento conseguimos prover uma legenda ou um capítulo para o conteúdo restante.
+	
+Esse recurso produz uma interatividade sem nenhum javascript.
+	
+
+	-->
+	
+<details open>
+	<summary>Autor</summary>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, nemo, dolores numquam fugit ipsum velit eaque repudiandae ea libero est. Consequuntur, consequatur ut earum dolore placeat doloribus in voluptatem culpa.</p>
+</details>
+
+	
+<details>
+	<summary>Livros</summary>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, nemo, dolores numquam fugit ipsum velit eaque repudiandae ea libero est. Consequuntur, consequatur ut earum dolore placeat doloribus in voluptatem culpa.</p>
+</details>
+
+	
+<details>
+	<summary>Jobs</summary>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, nemo, dolores numquam fugit ipsum velit eaque repudiandae ea libero est. Consequuntur, consequatur ut earum dolore placeat doloribus in voluptatem culpa.</p>
+</details>
+
+
+</body>
+</html>
