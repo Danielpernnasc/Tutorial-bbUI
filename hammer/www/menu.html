@@ -25,6 +25,9 @@
 			var menu = document.getElementById("menu");
         	
         	Hammer(element).on("swipe", function(event) {
+        		//verificamos qual o valor da propriedade direction caso "right"
+        		// ele adiciona o class ao menu active
+        		// caso o valor do direction for "left" ele adiciona o class "left"
         		if(event.gesture.direction == "right"){
         			menu.className = "active";	
         		}else if(event.gesture.direction == "left"){
