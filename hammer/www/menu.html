@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Hammer Tutorial</title>
+    </head>
+    <body>
+        <div id="box">
+        	<nav id="menu" class="hide">
+        		<ul>
+        			<li><a href="#">item 1</a></li>
+        			<li><a href="#">item 2</a></li>
+        			<li><a href="#">item 3</a></li>
+        			<li><a href="#">item 4</a></li>
+        		</ul>
+        	</nav>
+        </div>
+        
+        <script type="text/javascript" src="js/hammer.min.js"></script>
+        <script type="text/javascript">
+        	var element = document.getElementById('box');
+			var menu = document.getElementById("menu");
+        	
+        	Hammer(element).on("swipe", function(event) {
+        		if(event.gesture.direction == "right"){
+        			menu.className = "active";	
+        		}else if(event.gesture.direction == "left"){
+        			menu.className = "hide";
+        		}
+    		});
+        </script>
+    </body>
+</html>
