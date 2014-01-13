@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	
+	
+<script>
+	
+	function handleOrientationChange(mediaQuerie) {
+  		if (mediaQuerie.matches) {
+    		alert("portrait")
+  		} else {
+    		alert("landscape")
+  		}
+	}
+	
+	/* Criamos uma variável para armazenar a media querie */
+	var mediaQuerie = window.matchMedia("(orientation: portrait)");
+	/* Adicionamos um listenr para acompanhar a mudança de orientação */
+	mediaQuerie.addListener(handleOrientationChange);
+</script>	
+</body>
+</html>

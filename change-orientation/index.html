@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Listen Change Orientation by JS</title>
+	
+</head>
+
+<body>
+<div id="output">Listen Change Orientantion:</div>
+<script>
+   window.addEventListener('orientationchange', function(){
+   	switch(window.orientation) 
+    {  
+      case -90:
+      case 90:
+        alert('landscape');
+        break; 
+      default:
+        alert('portrait');
+        break; 
+    }
+   });
+</script>
+
+</body>
+</html>
