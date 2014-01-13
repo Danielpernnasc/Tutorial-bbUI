@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <title>Hello World Parse</title>
+    </head>
+    <body>
+        <div class="app">
+            <h1>App com Parse - TODO LIST</h1>
+            <ul id="list-tasks">
+           	</ul>
+            
+            <form id="form-task">
+            	<fieldset>
+            		<label>Tarefa:</label>
+            		<input type="text" name="tarefa" id="tarefa" required>
+            	</fieldset>
+            	<input type="submit" value="enviar">
+            </form>
+        </div>
+        <script type="text/javascript" src="cordova.js"></script>  
+		<script src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
+        <script type="text/javascript">
+            		Parse.initialize("LUJcWvuLzi7Y7tqeKjAdFirU62jh8JCvMRcdW4Vc", "kP75lRJcItwAIwy1O9r3eofBuWuJez2fZTJJ9DE2");
+			//Parse.initialize("APPLICATION_ID","JAVASCRIPT_KEY")
+        	var Tasks;
+        	var listOfTasks;
+        	
+        	function initApp(){
+        		Tasks = Parse.Object.extend("Tasks");
+        		showTasks();
+        		document.getElementById("form-task").addEventListener("submit",onSubmit);
+        		listOfTasks = document.getElementById("list-tasks");	
+        	}
+        	
+        	function showTasks(){
+        		var query = new Parse.Query("Tasks");
+        		query.find({
+        		success:function(results){
+        			
+        			for(var result in results){
+        				console.log("success",results[result]);
+        			}	
+        		},
+        		error:function(error){
+        			console.log("error",error)
+        		}
+        		})
+        		console.log(query);
+        	}
+        	
+        	 function onSubmit(e){
+				var task = {};
+				console.log(e)
+				//pegamos o elemento com id 1 o input com a descrição
+				task.descricao = e.target[1].value;
+				alert(task.descricao)
+				task.done = "false";
+				
+				saveTask(task);
+				// utiliza o preventDefault para evitar do form realizar o reload da página
+				e.preventDefault();
+			}
+        	
+        	function saveTask(task){
+        	 	var taskCloud = new Tasks();
+        	 	taskCloud.save(task).then(function(object) {
+                  alert("Informação salva com sucesso!");
+                  showTasks();
+            	});
+        	}
+        	
+        	window.addEventListener("load", initApp)
+        </script>
+    </body>
+</html>

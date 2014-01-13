@@ -9,4 +9,6 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
+    <access subdomains="true" uri="http://www.parsecdn.com/" />
+    <access subdomains="true" uri="https://api.parse.com/" />
 </widget>
