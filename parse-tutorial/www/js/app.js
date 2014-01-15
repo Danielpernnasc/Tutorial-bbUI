@@ -1,71 +1,101 @@
-  		Parse.initialize("LUJcWvuLzi7Y7tqeKjAdFirU62jh8JCvMRcdW4Vc", "kP75lRJcItwAIwy1O9r3eofBuWuJez2fZTJJ9DE2");
-			//Parse.initialize("APPLICATION_ID","JAVASCRIPT_KEY")
-        	var Tasks;
-        	var listOfTasks;
-        	var inputTask;
-        	
-        	//função para inicializar nosso app
-        	function initApp(){
-        		Tasks = Parse.Object.extend("Tasks");
-        		//showTasks busca tarefas já cadastradas em nosso app
-        		showTasks();
-        		//Adicionamos um lister para o nosso form
-        		document.getElementById("form-task").addEventListener("submit",onSubmit);
+Parse.initialize("LUJcWvuLzi7Y7tqeKjAdFirU62jh8JCvMRcdW4Vc", "kP75lRJcItwAIwy1O9r3eofBuWuJez2fZTJJ9DE2");
+//Parse.initialize("APPLICATION_ID","JAVASCRIPT_KEY")
+
+ var app = {
+	 		Tasks:null,
+        	listOfTasks:null,
+        	inputTask:null,
+	 
+	 		//função para inicializar nosso app
+        	initApp: function(){
+        		app.Tasks = Parse.Object.extend("Tasks");
+        		
+				//showTasks busca tarefas já cadastradas em nosso app
+        		app.showTasks();
+        		
+				//Adicionamos um lister para o nosso form
+        		document.getElementById("form-task").addEventListener("submit",app.onSubmit);
         		
         		//Fazemos um cache dos itens que acessamos mais de uma vez em nosso app
-        		listOfTasks = document.getElementById("list-tasks");
-        		inputTask = document.getElementById("tarefa")
-        	}
-        	
-        	//função resposável por consultar os dados na nuvem
-        	function showTasks(){
+        		app.listOfTasks = document.getElementById("list-tasks");
+        		app.inputTask = document.getElementById("tarefa");
+				
+				//vamos adicionar o clique na ul, pq inicialmente não temos os li's
+        		app.listOfTasks.addEventListener("click",app.clickList);
+        	},
+	 
+	 		//função resposável por consultar os dados na nuvem
+        	showTasks: function(){
         		//chamamos a função Query do Parse parar varer a nossa base
         		var query = new Parse.Query("Tasks");
         		
         		//a função trata a query para sucesso ou erro de nossa consulta
         		query.find({
-        		success:function(results){
-        			//esse bloco será executado se ocorrer tudo bem com nossa query
-        			var markupList = "";
-        			//os resultados vem em um array de objetos
-        			//varremos o nosso array e montamos um markup
-        			for(var id in results){
-        				console.log("success",results[id].attributes.descricao);
-        				markupList += "<li class='item-task topcoat-list__item' data-id='"+results[id].id+"' data-done='"+ results[id].attributes.done +"'>"+ results[id].attributes.descricao +"</li>"
-        			}
-        			listOfTasks.innerHTML = markupList;
-        		},
-        		error:function(error){
-        			//tratamento para caso de erro
-        			console.log("error",error)
-        		}
+					success:function(results){
+						//esse bloco será executado se ocorrer tudo bem com nossa query
+						var markupList = "";
+						
+						//os resultados vem em um array de objetos
+						//varremos o nosso array e montamos um markup
+						for(var id in results){
+							console.log("success",results[id].attributes.descricao);
+							markupList += "<li class='item-task' data-id='"+results[id].id+"' data-done='"+ results[id].attributes.done +"'>"+ results[id].attributes.descricao +"</li>"
+						}
+						app.listOfTasks.innerHTML = markupList;
+					},
+					error:function(error){
+						//tratamento para caso de erro
+						console.log("error",error)
+					}
         		})
-        		console.log(query);
-        	}
-        	
-        	//função para fazer o trantamento quando o usuário envia os dados do form
-        	function onSubmit(e){
+        	},
+				
+			// função para modificar o status da task
+			clickList: function(e){
+				if(e.target.localName == "li"){
+					e.target.dataset.done = (e.target.dataset.done === 'true')? false : true;
+					app.editTask(e.target.dataset.id,e.target.dataset.done);
+				}
+			},
+
+			//função para fazer o trantamento quando o usuário envia os dados do form
+        	onSubmit: function(e){
 				var task = {};
 				
 				//pegamos o valor cadastrado em nosso input
-				task.descricao = inputTask.value;
+				task.descricao = app.inputTask.value;
 				task.done = "false";
 				
 				//passamos o nosso objeto para ser salvo na cloud
-				saveTask(task);
+				app.saveTask(task);
 				// utiliza o preventDefault para evitar do form realizar o reload da página
 				e.preventDefault();
-			}
-        	
-        	
+			},
+
+
         	//função específica para salvar as tasks na nuvem
-        	function saveTask(task){
-        	 	var taskCloud = new Tasks();
+        	saveTask: function (task){
+        	 	var taskCloud = new app.Tasks();
         	 	taskCloud.save(task).then(function(object) {
-                  alert("Task salva com sucesso!");
-                  showTasks();
-                  inputTask.value = "";
+                  console.log("Task salva com sucesso!");
+                  app.showTasks();
+                  app.inputTask.value = "";
             	});
-        	}
-        	
-        	window.addEventListener("load", initApp)
+        	},
+	 		
+	 		//função para editar um item salvo na cloud
+	 		editTask: function (id,done){
+				var query = new Parse.Query(app.Tasks);
+				query.get(id, {
+				  success: function(task) {
+					 task.set("done", done);
+					 task.save()
+				  },
+				  error: function(object, error) {
+					console.log("erro ao salvar o objeto", object, error)
+				  }
+				});
+			}		
+ }
+ 			
+window.addEventListener("load", app.initApp)

@@ -1,0 +1,14 @@
+.list-tasks{
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+
+.item-task{
+	padding: 10px;
+	border-bottom: 1px solid #ccc;
+}
+
+.item-task[data-done="true"]{
+	text-decoration:line-through;
+}
