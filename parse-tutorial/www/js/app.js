@@ -1,5 +1,4 @@
-Parse.initialize("LUJcWvuLzi7Y7tqeKjAdFirU62jh8JCvMRcdW4Vc", "kP75lRJcItwAIwy1O9r3eofBuWuJez2fZTJJ9DE2");
-//Parse.initialize("APPLICATION_ID","JAVASCRIPT_KEY")
+Parse.initialize("APPLICATION_ID","JAVASCRIPT_KEY")
 
  var app = {
 	 		Tasks:null,
@@ -38,8 +37,7 @@ Parse.initialize("LUJcWvuLzi7Y7tqeKjAdFirU62jh8JCvMRcdW4Vc", "kP75lRJcItwAIwy1O9
 						//os resultados vem em um array de objetos
 						//varremos o nosso array e montamos um markup
 						for(var id in results){
-							console.log("success",results[id].attributes.descricao);
-							markupList += "<li class='item-task' data-id='"+results[id].id+"' data-done='"+ results[id].attributes.done +"'>"+ results[id].attributes.descricao +"</li>"
+							markupList += "<li class='item-task' data-id='"+results[id].id+"' data-done='"+ results[id].attributes.done +"'>"+ results[id].attributes.descricao +"<button class='btn-remove' data-id='"+results[id].id+"'>Remover</button></li>";
 						}
 						app.listOfTasks.innerHTML = markupList;
 					},
@@ -55,6 +53,10 @@ Parse.initialize("LUJcWvuLzi7Y7tqeKjAdFirU62jh8JCvMRcdW4Vc", "kP75lRJcItwAIwy1O9
 				if(e.target.localName == "li"){
 					e.target.dataset.done = (e.target.dataset.done === 'true')? false : true;
 					app.editTask(e.target.dataset.id,e.target.dataset.done);
+				}else if(e.target.localName == "button"){
+					e.target.disabled = "disabled";
+					e.target.innerHTML = "Removendo..."
+					app.removeTask(e.target.dataset.id);
 				}
 			},
 
@@ -95,7 +97,19 @@ Parse.initialize("LUJcWvuLzi7Y7tqeKjAdFirU62jh8JCvMRcdW4Vc", "kP75lRJcItwAIwy1O9
 					console.log("erro ao salvar o objeto", object, error)
 				  }
 				});
-			}		
+			},
+	 		removeTask:function(id){
+				var query = new Parse.Query(app.Tasks);
+				query.get(id, {
+				  success: function(task) {
+					 task.destroy({
+					 	success:function(task){
+							app.showTasks();
+						}
+					 })
+				  }
+				});
+			}
  }
  			
 window.addEventListener("load", app.initApp)

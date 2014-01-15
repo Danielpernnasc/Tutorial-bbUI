@@ -1,3 +1,15 @@
+.app{
+	width:340px;
+	margin:0 auto;
+	border:1px solid #666;
+	background: #fff;
+	box-shadow: 5px 5px #ccc;
+	padding:20px 10px;
+	box-sizing:border-box;
+	font-family:Verdana;
+}
+
+
 .list-tasks{
 	list-style:none;
 	margin:0;
@@ -11,4 +23,16 @@
 
 .item-task[data-done="true"]{
 	text-decoration:line-through;
+}
+
+.btn-remove{
+	border:1px solid red;
+	background:#fff;
+	color:red;
+	float:right;
+}
+
+.btn-remove:disabled{
+	border:1px solid gray;
+	color:gray;
 }

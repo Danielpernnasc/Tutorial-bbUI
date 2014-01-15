@@ -4,36 +4,28 @@
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <title>Hello World Parse</title>
+        <title>Todo List App Parse</title>
+        <link rel="stylesheet" href="css/app.css">
     </head>
     <body>
         <div class="app">
-            <h1>App com Parse - TODO LIST</h1>
-            <ul id="tarefas">
+           <header>
+           		<h1>TODO LIST</h1>
+           </header> 
+            <ul id="list-tasks" class="list-tasks">
+           		<li data-done="false" class="item-task">Carregando...</li>
            	</ul>
-            
-            <form id="form-tarefa">
-            	<fieldset>
-            		<label>Tarefa:</label>
-            		<input type="text" name="tarefa" id="tarefa">
-            	</fieldset>
+            <br/>
+            	<button id="clear-btn">Limpar lista</button>
+            <hr/>
+            <form id="form-task">
+            	<label>Tarefa:</label>
+            	<input type="text" name="tarefa" id="tarefa" required>
+         
             	<input type="submit" value="enviar">
             </form>
         </div>
-        <script type="text/javascript" src="cordova.js"></script>  
-		<script src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
-        <script type="text/javascript">
-            Parse.initialize("LUJcWvuLzi7Y7tqeKjAdFirU62jh8JCvMRcdW4Vc", "kP75lRJcItwAIwy1O9r3eofBuWuJez2fZTJJ9DE2");
-			//Parse.initialize("APPLICATION_ID","JAVASCRIPT_KEY")
-        	
-        	var MyObject = Parse.Object.extend("MyObject");	
-			var test = new MyObject();
-			
-  			test.save({nome: "Blog Fellyph Cintra"}).then(function(object) {
-  				console.log(object);
-  				alert("Informação salva com sucesso!");
-			});
-        
-        </script>
+        <script src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
+        <script src="js/app.js"></script>
     </body>
 </html>
