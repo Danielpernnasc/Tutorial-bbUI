@@ -1,0 +1,39 @@
+body{
+	font-family:sans-serif;
+}
+.app{
+	box-sizing:border-box;
+	margin:auto;
+	padding:15px;
+	width:340px;
+}
+
+.list-cars{
+	width:100%;
+}
+
+.list-cars td{
+	border-bottom:2px solid #999;
+	padding: 4px 0;
+	text-align:center;
+}
+
+.item-car:nth-child(even){
+	background: #f3f3f3;
+}
+
+label{
+	display:inline-block;
+	width: 20%;
+}
+
+input{
+	border:1px solid #999;
+	padding:3px;
+	width: 70%;
+}
+
+input[type='number'],
+input[type='submit']{
+	width: 30%;
+}

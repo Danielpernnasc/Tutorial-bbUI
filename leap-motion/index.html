@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Leap Motion</title>
+</head>
+<body>
+	<div class="container">
+		<button type="button" class="btn leap-interactive" onclick="alert('oi kiko')" leap-attractor-x-padding="10">Tech Center</button>
+	</div>
+	
+		<!-- Include the CSS -->
+<link rel="stylesheet" href="http://leapstrap.alex-wilkes.com/css/leapstrap.css" />
+
+<!-- Include the JS dependencies -->
+<!-- Maybe you already use these? -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
+<script src="//js.leapmotion.com/0.2.2/leap.min.js"></script>
+
+<!-- Include the Leapstrap JS -->
+<script src="http://leapstrap.alex-wilkes.com/js/leapstrap.js"></script>
+
+<!-- Init Leap, Set all "a" interactive, use 1 Leap cursor/finger -->
+<script>
+
+LeapManager.init({
+	interactiveSelector: "a",
+	maxCursors:1,
+	enableMetaGestures: false,
+	enableDefaultMetaGestureActions: false
+});
+
+</script>
+</body>
+</html>
